@@ -1,0 +1,610 @@
+{
+  "address": "0xdD1E5244226C16e63299d7006FF54711CCB356a7",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ReentrancyGuardReentrantCall",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "score",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "reward",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardClaimed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "score",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "ScoreSubmitted",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_REWARD_PER_CLAIM",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_SCORE_FOR_REWARD",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "REWARD_PER_SCORE_POINT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_score",
+          "type": "uint256"
+        }
+      ],
+      "name": "claimReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getContractBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLeaderboard",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "score",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct tetrachain.PlayerScore[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_start",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_limit",
+          "type": "uint256"
+        }
+      ],
+      "name": "getLeaderboardPaginated",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "score",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct tetrachain.PlayerScore[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalScores",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_player",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_score",
+          "type": "uint256"
+        }
+      ],
+      "name": "hasClaimedReward",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "highestScores",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "leaderboard",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "score",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "rewardsClaimed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_score",
+          "type": "uint256"
+        }
+      ],
+      "name": "submitScore",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x2f42b87ffac5caea0350bb50c7bc671ac685eb66b1f75177a2896282cf83979e",
+  "receipt": {
+    "to": null,
+    "from": "0xDc997D997f48FC47b1d428b0A45341CB06c80b6c",
+    "contractAddress": "0xdD1E5244226C16e63299d7006FF54711CCB356a7",
+    "transactionIndex": 43,
+    "gasUsed": "888945",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000001000200000000000000000000000000000000020000000000000000000800000000000000000000000000000000400000000000080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000200000000000000000000000040000000000000000000000010000000000",
+    "blockHash": "0x837e6b3da8659fe4006694ab23959060215b2421ffc52b9b1ca69d13fd8cebcc",
+    "transactionHash": "0x2f42b87ffac5caea0350bb50c7bc671ac685eb66b1f75177a2896282cf83979e",
+    "logs": [
+      {
+        "transactionIndex": 43,
+        "blockNumber": 9251323,
+        "transactionHash": "0x2f42b87ffac5caea0350bb50c7bc671ac685eb66b1f75177a2896282cf83979e",
+        "address": "0xdD1E5244226C16e63299d7006FF54711CCB356a7",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x000000000000000000000000dc997d997f48fc47b1d428b0a45341cb06c80b6c"
+        ],
+        "data": "0x",
+        "logIndex": 44,
+        "blockHash": "0x837e6b3da8659fe4006694ab23959060215b2421ffc52b9b1ca69d13fd8cebcc"
+      }
+    ],
+    "blockNumber": 9251323,
+    "cumulativeGasUsed": "16667470",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "b9cf59754e21cadaac85709d889bfdfb",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ReentrancyGuardReentrantCall\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"reward\",\"type\":\"uint256\"}],\"name\":\"RewardClaimed\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"ScoreSubmitted\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"MAX_REWARD_PER_CLAIM\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"MIN_SCORE_FOR_REWARD\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"REWARD_PER_SCORE_POINT\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_score\",\"type\":\"uint256\"}],\"name\":\"claimReward\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"deposit\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getContractBalance\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLeaderboard\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct tetrachain.PlayerScore[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_start\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_limit\",\"type\":\"uint256\"}],\"name\":\"getLeaderboardPaginated\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"internalType\":\"struct tetrachain.PlayerScore[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getTotalScores\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_player\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_score\",\"type\":\"uint256\"}],\"name\":\"hasClaimedReward\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"highestScores\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"leaderboard\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"player\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"score\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"rewardsClaimed\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_score\",\"type\":\"uint256\"}],\"name\":\"submitScore\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_amount\",\"type\":\"uint256\"}],\"name\":\"withdraw\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}],\"ReentrancyGuardReentrantCall()\":[{\"details\":\"Unauthorized reentrant call.\"}]},\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/tetrachain.sol\":\"tetrachain\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Context} from \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * The initial owner is set to the address provided by the deployer. This can\\n * later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    /**\\n     * @dev The caller account is not authorized to perform an operation.\\n     */\\n    error OwnableUnauthorizedAccount(address account);\\n\\n    /**\\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\\n     */\\n    error OwnableInvalidOwner(address owner);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\\n     */\\n    constructor(address initialOwner) {\\n        if (initialOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(initialOwner);\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        if (owner() != _msgSender()) {\\n            revert OwnableUnauthorizedAccount(_msgSender());\\n        }\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        if (newOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/ReentrancyGuard.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (utils/ReentrancyGuard.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Contract module that helps prevent reentrant calls to a function.\\n *\\n * Inheriting from `ReentrancyGuard` will make the {nonReentrant} modifier\\n * available, which can be applied to functions to make sure there are no nested\\n * (reentrant) calls to them.\\n *\\n * Note that because there is a single `nonReentrant` guard, functions marked as\\n * `nonReentrant` may not call one another. This can be worked around by making\\n * those functions `private`, and then adding `external` `nonReentrant` entry\\n * points to them.\\n *\\n * TIP: If you would like to learn more about reentrancy and alternative ways\\n * to protect against it, check out our blog post\\n * https://blog.openzeppelin.com/reentrancy-after-istanbul/[Reentrancy After Istanbul].\\n */\\nabstract contract ReentrancyGuard {\\n    // Booleans are more expensive than uint256 or any type that takes up a full\\n    // word because each write operation emits an extra SLOAD to first read the\\n    // slot's contents, replace the bits taken up by the boolean, and then write\\n    // back. This is the compiler's defense against contract upgrades and\\n    // pointer aliasing, and it cannot be disabled.\\n\\n    // The values being non-zero value makes deployment a bit more expensive,\\n    // but in exchange the refund on every call to nonReentrant will be lower in\\n    // amount. Since refunds are capped to a percentage of the total\\n    // transaction's gas, it is best to keep them low in cases like this one, to\\n    // increase the likelihood of the full refund coming into effect.\\n    uint256 private constant NOT_ENTERED = 1;\\n    uint256 private constant ENTERED = 2;\\n\\n    uint256 private _status;\\n\\n    /**\\n     * @dev Unauthorized reentrant call.\\n     */\\n    error ReentrancyGuardReentrantCall();\\n\\n    constructor() {\\n        _status = NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Prevents a contract from calling itself, directly or indirectly.\\n     * Calling a `nonReentrant` function from another `nonReentrant`\\n     * function is not supported. It is possible to prevent this from happening\\n     * by making the `nonReentrant` function external, and making it call a\\n     * `private` function that does the actual work.\\n     */\\n    modifier nonReentrant() {\\n        _nonReentrantBefore();\\n        _;\\n        _nonReentrantAfter();\\n    }\\n\\n    function _nonReentrantBefore() private {\\n        // On the first call to nonReentrant, _status will be NOT_ENTERED\\n        if (_status == ENTERED) {\\n            revert ReentrancyGuardReentrantCall();\\n        }\\n\\n        // Any calls to nonReentrant after this point will fail\\n        _status = ENTERED;\\n    }\\n\\n    function _nonReentrantAfter() private {\\n        // By storing the original value once again, a refund is triggered (see\\n        // https://eips.ethereum.org/EIPS/eip-2200)\\n        _status = NOT_ENTERED;\\n    }\\n\\n    /**\\n     * @dev Returns true if the reentrancy guard is currently set to \\\"entered\\\", which indicates there is a\\n     * `nonReentrant` function in the call stack.\\n     */\\n    function _reentrancyGuardEntered() internal view returns (bool) {\\n        return _status == ENTERED;\\n    }\\n}\\n\",\"keccak256\":\"0xf980daa263b661ab8ddee7d4fd833c7da7e7995e2c359ff1f17e67e4112f2236\",\"license\":\"MIT\"},\"contracts/tetrachain.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\r\\nimport \\\"@openzeppelin/contracts/utils/ReentrancyGuard.sol\\\";\\r\\n\\r\\n\\r\\ncontract tetrachain is Ownable, ReentrancyGuard {\\r\\n    struct PlayerScore {\\r\\n        address player;\\r\\n        uint256 score;\\r\\n        uint256 timestamp;\\r\\n    }\\r\\n\\r\\n    // Mapping to store the highest score for each player\\r\\n    mapping(address => uint256) public highestScores;\\r\\n    \\r\\n    // Track claimed rewards to prevent double claiming\\r\\n    mapping(address => mapping(uint256 => bool)) public rewardsClaimed;\\r\\n    \\r\\n    // Event to log when a new score is submitted\\r\\n    event ScoreSubmitted(address indexed player, uint256 score, uint256 timestamp);\\r\\n    event RewardClaimed(address indexed player, uint256 score, uint256 reward);\\r\\n\\r\\n    // Array to store all submitted scores (for leaderboard)\\r\\n    PlayerScore[] public leaderboard;\\r\\n\\r\\n    // Basic reward mechanism\\r\\n    uint256 public constant REWARD_PER_SCORE_POINT = 1 ether / 100000; // 0.00001 ETH per score point\\r\\n    uint256 public constant MIN_SCORE_FOR_REWARD = 100;\\r\\n    uint256 public constant MAX_REWARD_PER_CLAIM = 1 ether; // Cap rewards to prevent drainage\\r\\n\\r\\n    constructor() Ownable(msg.sender) {}\\r\\n\\r\\n    // Function to submit a new score\\r\\n    function submitScore(uint256 _score) public {\\r\\n        require(_score > 0, \\\"Score must be positive\\\");\\r\\n        require(_score <= 999999, \\\"Score too high\\\"); // Reasonable upper limit\\r\\n\\r\\n        // Only update if current score is higher than previous highest score for this player\\r\\n        if (_score > highestScores[msg.sender]) {\\r\\n            highestScores[msg.sender] = _score;\\r\\n        }\\r\\n\\r\\n        leaderboard.push(PlayerScore(msg.sender, _score, block.timestamp));\\r\\n        emit ScoreSubmitted(msg.sender, _score, block.timestamp);\\r\\n    }\\r\\n\\r\\n    // Function to get the current leaderboard (basic, could be optimized for large data)\\r\\n    function getLeaderboard() public view returns (PlayerScore[] memory) {\\r\\n        return leaderboard;\\r\\n    }\\r\\n\\r\\n    // Function to get leaderboard with pagination to handle large datasets\\r\\n    function getLeaderboardPaginated(uint256 _start, uint256 _limit) \\r\\n        public \\r\\n        view \\r\\n        returns (PlayerScore[] memory) \\r\\n    {\\r\\n        require(_start < leaderboard.length, \\\"Start index out of bounds\\\");\\r\\n        \\r\\n        uint256 end = _start + _limit;\\r\\n        if (end > leaderboard.length) {\\r\\n            end = leaderboard.length;\\r\\n        }\\r\\n        \\r\\n        PlayerScore[] memory result = new PlayerScore[](end - _start);\\r\\n        for (uint256 i = _start; i < end; i++) {\\r\\n            result[i - _start] = leaderboard[i];\\r\\n        }\\r\\n        \\r\\n        return result;\\r\\n    }\\r\\n\\r\\n    // Function to calculate and claim rewards (fixed)\\r\\n    function claimReward(uint256 _score) public nonReentrant {\\r\\n        require(_score >= MIN_SCORE_FOR_REWARD, \\\"Score too low for reward\\\");\\r\\n        require(_score <= highestScores[msg.sender], \\\"Cannot claim reward for score higher than your best\\\");\\r\\n        require(!rewardsClaimed[msg.sender][_score], \\\"Reward already claimed for this score\\\");\\r\\n        \\r\\n        // Calculate reward amount with cap\\r\\n        uint256 rewardAmount = _score * REWARD_PER_SCORE_POINT;\\r\\n        if (rewardAmount > MAX_REWARD_PER_CLAIM) {\\r\\n            rewardAmount = MAX_REWARD_PER_CLAIM;\\r\\n        }\\r\\n        \\r\\n        require(address(this).balance >= rewardAmount, \\\"Contract has insufficient funds\\\");\\r\\n\\r\\n        // Mark reward as claimed\\r\\n        rewardsClaimed[msg.sender][_score] = true;\\r\\n\\r\\n        // Transfer reward\\r\\n        (bool success, ) = payable(msg.sender).call{value: rewardAmount}(\\\"\\\");\\r\\n        require(success, \\\"Failed to send reward\\\");\\r\\n        \\r\\n        emit RewardClaimed(msg.sender, _score, rewardAmount);\\r\\n    }\\r\\n\\r\\n    // Owner can deposit ETH into the contract for rewards\\r\\n    function deposit() public payable onlyOwner {}\\r\\n\\r\\n    // Owner can withdraw ETH from the contract (emergency/admin)\\r\\n    function withdraw(uint256 _amount) public onlyOwner {\\r\\n        require(address(this).balance >= _amount, \\\"Insufficient balance\\\");\\r\\n        (bool success, ) = payable(owner()).call{value: _amount}(\\\"\\\");\\r\\n        require(success, \\\"Failed to withdraw\\\");\\r\\n    }\\r\\n\\r\\n    // Get contract balance\\r\\n    function getContractBalance() public view returns (uint256) {\\r\\n        return address(this).balance;\\r\\n    }\\r\\n\\r\\n    // Get total number of scores submitted\\r\\n    function getTotalScores() public view returns (uint256) {\\r\\n        return leaderboard.length;\\r\\n    }\\r\\n\\r\\n    // Check if a reward has been claimed\\r\\n    function hasClaimedReward(address _player, uint256 _score) public view returns (bool) {\\r\\n        return rewardsClaimed[_player][_score];\\r\\n    }\\r\\n}\",\"keccak256\":\"0x73691cd9aa15caf5d0ff81da4f743aad76bfa8d6f4b943c68b2f3347bb04a9c4\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50338061003757604051631e4fbdf760e01b81526000600482015260240160405180910390fd5b6100408161004a565b506001805561009a565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b610e3f806100a96000396000f3fe6080604052600436106101095760003560e01c8063ae169a5011610095578063d0e30db011610064578063d0e30db014610303578063d4e355bc1461030b578063d52754d21461032b578063eec6d61314610345578063f2fde38b1461035a57600080fd5b8063ae169a5014610251578063aff0b29714610271578063bf36839914610291578063c6505ed6146102d657600080fd5b8063715018a6116100dc578063715018a6146101945780637c360101146101a95780638da5cb5b146101d957806391d3cfdd146102015780639471676c1461023c57600080fd5b80630d9d41961461010e5780632e1a7d4d1461013d5780636d763a6e1461015f5780636f9fb98a14610181575b600080fd5b34801561011a57600080fd5b5061012a670de0b6b3a764000081565b6040519081526020015b60405180910390f35b34801561014957600080fd5b5061015d610158366004610c6c565b61037a565b005b34801561016b57600080fd5b5061017461046a565b6040516101349190610c85565b34801561018d57600080fd5b504761012a565b3480156101a057600080fd5b5061015d6104ec565b3480156101b557600080fd5b506101c96101c4366004610d03565b610500565b6040519015158152602001610134565b3480156101e557600080fd5b506000546040516001600160a01b039091168152602001610134565b34801561020d57600080fd5b506101c961021c366004610d03565b600360209081526000928352604080842090915290825290205460ff1681565b34801561024857600080fd5b5060045461012a565b34801561025d57600080fd5b5061015d61026c366004610c6c565b61052e565b34801561027d57600080fd5b5061015d61028c366004610c6c565b6107f5565b34801561029d57600080fd5b506102b16102ac366004610c6c565b6109ac565b604080516001600160a01b039094168452602084019290925290820152606001610134565b3480156102e257600080fd5b5061012a6102f1366004610d2d565b60026020526000908152604090205481565b61015d6109e9565b34801561031757600080fd5b50610174610326366004610d4f565b6109f1565b34801561033757600080fd5b5061012a6509184e72a00081565b34801561035157600080fd5b5061012a606481565b34801561036657600080fd5b5061015d610375366004610d2d565b610b8a565b610382610bc5565b804710156103ce5760405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b60448201526064015b60405180910390fd5b600080546040516001600160a01b039091169083908381818185875af1925050503d806000811461041b576040519150601f19603f3d011682016040523d82523d6000602084013e610420565b606091505b50509050806104665760405162461bcd60e51b81526020600482015260126024820152714661696c656420746f20776974686472617760701b60448201526064016103c5565b5050565b60606004805480602002602001604051908101604052809291908181526020016000905b828210156104e3576000848152602090819020604080516060810182526003860290920180546001600160a01b031683526001808201548486015260029091015491830191909152908352909201910161048e565b50505050905090565b6104f4610bc5565b6104fe6000610bf2565b565b6001600160a01b038216600090815260036020908152604080832084845290915290205460ff165b92915050565b610536610c42565b60648110156105875760405162461bcd60e51b815260206004820152601860248201527f53636f726520746f6f206c6f7720666f7220726577617264000000000000000060448201526064016103c5565b336000908152600260205260409020548111156106025760405162461bcd60e51b815260206004820152603360248201527f43616e6e6f7420636c61696d2072657761726420666f722073636f726520686960448201527219da195c881d1a185b881e5bdd5c8818995cdd606a1b60648201526084016103c5565b33600090815260036020908152604080832084845290915290205460ff161561067b5760405162461bcd60e51b815260206004820152602560248201527f52657761726420616c726561647920636c61696d656420666f7220746869732060448201526473636f726560d81b60648201526084016103c5565b600061068d6509184e72a00083610d87565b9050670de0b6b3a76400008111156106aa5750670de0b6b3a76400005b804710156106fa5760405162461bcd60e51b815260206004820152601f60248201527f436f6e74726163742068617320696e73756666696369656e742066756e64730060448201526064016103c5565b336000818152600360209081526040808320868452909152808220805460ff191660011790555190919083908381818185875af1925050503d806000811461075e576040519150601f19603f3d011682016040523d82523d6000602084013e610763565b606091505b50509050806107ac5760405162461bcd60e51b815260206004820152601560248201527411985a5b1959081d1bc81cd95b99081c995dd85c99605a1b60448201526064016103c5565b604080518481526020810184905233917ff01da32686223933d8a18a391060918c7f11a3648639edd87ae013e2e2731743910160405180910390a250506107f260018055565b50565b6000811161083e5760405162461bcd60e51b815260206004820152601660248201527553636f7265206d75737420626520706f73697469766560501b60448201526064016103c5565b620f423f8111156108825760405162461bcd60e51b815260206004820152600e60248201526d0a6c6dee4ca40e8dede40d0d2ced60931b60448201526064016103c5565b336000908152600260205260409020548111156108ac573360009081526002602052604090208190555b60408051606081018252338082526020808301858152428486018181526004805460018101825560009190915295517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b600390970296870180546001600160a01b0319166001600160a01b0390921691909117905591517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19c86015590517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19d90940193909355835185815290810192909252917fb7f20d0949b6a8bc59d005af4a52f7ff5d0cfcde9056fa556adb0e4b24dcb6d2910160405180910390a250565b600481815481106109bc57600080fd5b60009182526020909120600390910201805460018201546002909201546001600160a01b03909116925083565b6104fe610bc5565b6004546060908310610a455760405162461bcd60e51b815260206004820152601960248201527f537461727420696e646578206f7574206f6620626f756e64730000000000000060448201526064016103c5565b6000610a518385610d9e565b600454909150811115610a6357506004545b6000610a6f8583610db1565b67ffffffffffffffff811115610a8757610a87610dc4565b604051908082528060200260200182016040528015610ae557816020015b610ad2604051806060016040528060006001600160a01b0316815260200160008152602001600081525090565b815260200190600190039081610aa55790505b509050845b82811015610b815760048181548110610b0557610b05610dda565b600091825260209182902060408051606081018252600390930290910180546001600160a01b031683526001810154938301939093526002909201549181019190915282610b538884610db1565b81518110610b6357610b63610dda565b60200260200101819052508080610b7990610df0565b915050610aea565b50949350505050565b610b92610bc5565b6001600160a01b038116610bbc57604051631e4fbdf760e01b8152600060048201526024016103c5565b6107f281610bf2565b6000546001600160a01b031633146104fe5760405163118cdaa760e01b81523360048201526024016103c5565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600260015403610c6557604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b600060208284031215610c7e57600080fd5b5035919050565b602080825282518282018190526000919060409081850190868401855b82811015610cda57815180516001600160a01b0316855286810151878601528501518585015260609093019290850190600101610ca2565b5091979650505050505050565b80356001600160a01b0381168114610cfe57600080fd5b919050565b60008060408385031215610d1657600080fd5b610d1f83610ce7565b946020939093013593505050565b600060208284031215610d3f57600080fd5b610d4882610ce7565b9392505050565b60008060408385031215610d6257600080fd5b50508035926020909101359150565b634e487b7160e01b600052601160045260246000fd5b808202811582820484141761052857610528610d71565b8082018082111561052857610528610d71565b8181038181111561052857610528610d71565b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052603260045260246000fd5b600060018201610e0257610e02610d71565b506001019056fea2646970667358221220cc565ac9035a222196c5b81a5e12c82e6fc87f813b50a88a028fdf075223c8ff64736f6c63430008140033",
+  "deployedBytecode": "0x6080604052600436106101095760003560e01c8063ae169a5011610095578063d0e30db011610064578063d0e30db014610303578063d4e355bc1461030b578063d52754d21461032b578063eec6d61314610345578063f2fde38b1461035a57600080fd5b8063ae169a5014610251578063aff0b29714610271578063bf36839914610291578063c6505ed6146102d657600080fd5b8063715018a6116100dc578063715018a6146101945780637c360101146101a95780638da5cb5b146101d957806391d3cfdd146102015780639471676c1461023c57600080fd5b80630d9d41961461010e5780632e1a7d4d1461013d5780636d763a6e1461015f5780636f9fb98a14610181575b600080fd5b34801561011a57600080fd5b5061012a670de0b6b3a764000081565b6040519081526020015b60405180910390f35b34801561014957600080fd5b5061015d610158366004610c6c565b61037a565b005b34801561016b57600080fd5b5061017461046a565b6040516101349190610c85565b34801561018d57600080fd5b504761012a565b3480156101a057600080fd5b5061015d6104ec565b3480156101b557600080fd5b506101c96101c4366004610d03565b610500565b6040519015158152602001610134565b3480156101e557600080fd5b506000546040516001600160a01b039091168152602001610134565b34801561020d57600080fd5b506101c961021c366004610d03565b600360209081526000928352604080842090915290825290205460ff1681565b34801561024857600080fd5b5060045461012a565b34801561025d57600080fd5b5061015d61026c366004610c6c565b61052e565b34801561027d57600080fd5b5061015d61028c366004610c6c565b6107f5565b34801561029d57600080fd5b506102b16102ac366004610c6c565b6109ac565b604080516001600160a01b039094168452602084019290925290820152606001610134565b3480156102e257600080fd5b5061012a6102f1366004610d2d565b60026020526000908152604090205481565b61015d6109e9565b34801561031757600080fd5b50610174610326366004610d4f565b6109f1565b34801561033757600080fd5b5061012a6509184e72a00081565b34801561035157600080fd5b5061012a606481565b34801561036657600080fd5b5061015d610375366004610d2d565b610b8a565b610382610bc5565b804710156103ce5760405162461bcd60e51b8152602060048201526014602482015273496e73756666696369656e742062616c616e636560601b60448201526064015b60405180910390fd5b600080546040516001600160a01b039091169083908381818185875af1925050503d806000811461041b576040519150601f19603f3d011682016040523d82523d6000602084013e610420565b606091505b50509050806104665760405162461bcd60e51b81526020600482015260126024820152714661696c656420746f20776974686472617760701b60448201526064016103c5565b5050565b60606004805480602002602001604051908101604052809291908181526020016000905b828210156104e3576000848152602090819020604080516060810182526003860290920180546001600160a01b031683526001808201548486015260029091015491830191909152908352909201910161048e565b50505050905090565b6104f4610bc5565b6104fe6000610bf2565b565b6001600160a01b038216600090815260036020908152604080832084845290915290205460ff165b92915050565b610536610c42565b60648110156105875760405162461bcd60e51b815260206004820152601860248201527f53636f726520746f6f206c6f7720666f7220726577617264000000000000000060448201526064016103c5565b336000908152600260205260409020548111156106025760405162461bcd60e51b815260206004820152603360248201527f43616e6e6f7420636c61696d2072657761726420666f722073636f726520686960448201527219da195c881d1a185b881e5bdd5c8818995cdd606a1b60648201526084016103c5565b33600090815260036020908152604080832084845290915290205460ff161561067b5760405162461bcd60e51b815260206004820152602560248201527f52657761726420616c726561647920636c61696d656420666f7220746869732060448201526473636f726560d81b60648201526084016103c5565b600061068d6509184e72a00083610d87565b9050670de0b6b3a76400008111156106aa5750670de0b6b3a76400005b804710156106fa5760405162461bcd60e51b815260206004820152601f60248201527f436f6e74726163742068617320696e73756666696369656e742066756e64730060448201526064016103c5565b336000818152600360209081526040808320868452909152808220805460ff191660011790555190919083908381818185875af1925050503d806000811461075e576040519150601f19603f3d011682016040523d82523d6000602084013e610763565b606091505b50509050806107ac5760405162461bcd60e51b815260206004820152601560248201527411985a5b1959081d1bc81cd95b99081c995dd85c99605a1b60448201526064016103c5565b604080518481526020810184905233917ff01da32686223933d8a18a391060918c7f11a3648639edd87ae013e2e2731743910160405180910390a250506107f260018055565b50565b6000811161083e5760405162461bcd60e51b815260206004820152601660248201527553636f7265206d75737420626520706f73697469766560501b60448201526064016103c5565b620f423f8111156108825760405162461bcd60e51b815260206004820152600e60248201526d0a6c6dee4ca40e8dede40d0d2ced60931b60448201526064016103c5565b336000908152600260205260409020548111156108ac573360009081526002602052604090208190555b60408051606081018252338082526020808301858152428486018181526004805460018101825560009190915295517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19b600390970296870180546001600160a01b0319166001600160a01b0390921691909117905591517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19c86015590517f8a35acfbc15ff81a39ae7d344fd709f28e8600b4aa8c65c6b64bfe7fe36bd19d90940193909355835185815290810192909252917fb7f20d0949b6a8bc59d005af4a52f7ff5d0cfcde9056fa556adb0e4b24dcb6d2910160405180910390a250565b600481815481106109bc57600080fd5b60009182526020909120600390910201805460018201546002909201546001600160a01b03909116925083565b6104fe610bc5565b6004546060908310610a455760405162461bcd60e51b815260206004820152601960248201527f537461727420696e646578206f7574206f6620626f756e64730000000000000060448201526064016103c5565b6000610a518385610d9e565b600454909150811115610a6357506004545b6000610a6f8583610db1565b67ffffffffffffffff811115610a8757610a87610dc4565b604051908082528060200260200182016040528015610ae557816020015b610ad2604051806060016040528060006001600160a01b0316815260200160008152602001600081525090565b815260200190600190039081610aa55790505b509050845b82811015610b815760048181548110610b0557610b05610dda565b600091825260209182902060408051606081018252600390930290910180546001600160a01b031683526001810154938301939093526002909201549181019190915282610b538884610db1565b81518110610b6357610b63610dda565b60200260200101819052508080610b7990610df0565b915050610aea565b50949350505050565b610b92610bc5565b6001600160a01b038116610bbc57604051631e4fbdf760e01b8152600060048201526024016103c5565b6107f281610bf2565b6000546001600160a01b031633146104fe5760405163118cdaa760e01b81523360048201526024016103c5565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b600260015403610c6557604051633ee5aeb560e01b815260040160405180910390fd5b6002600155565b600060208284031215610c7e57600080fd5b5035919050565b602080825282518282018190526000919060409081850190868401855b82811015610cda57815180516001600160a01b0316855286810151878601528501518585015260609093019290850190600101610ca2565b5091979650505050505050565b80356001600160a01b0381168114610cfe57600080fd5b919050565b60008060408385031215610d1657600080fd5b610d1f83610ce7565b946020939093013593505050565b600060208284031215610d3f57600080fd5b610d4882610ce7565b9392505050565b60008060408385031215610d6257600080fd5b50508035926020909101359150565b634e487b7160e01b600052601160045260246000fd5b808202811582820484141761052857610528610d71565b8082018082111561052857610528610d71565b8181038181111561052857610528610d71565b634e487b7160e01b600052604160045260246000fd5b634e487b7160e01b600052603260045260246000fd5b600060018201610e0257610e02610d71565b506001019056fea2646970667358221220cc565ac9035a222196c5b81a5e12c82e6fc87f813b50a88a028fdf075223c8ff64736f6c63430008140033",
+  "devdoc": {
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ],
+      "ReentrancyGuardReentrantCall()": [
+        {
+          "details": "Unauthorized reentrant call."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 8,
+        "contract": "contracts/tetrachain.sol:tetrachain",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 188,
+        "contract": "contracts/tetrachain.sol:tetrachain",
+        "label": "_status",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 265,
+        "contract": "contracts/tetrachain.sol:tetrachain",
+        "label": "highestScores",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_mapping(t_address,t_uint256)"
+      },
+      {
+        "astId": 271,
+        "contract": "contracts/tetrachain.sol:tetrachain",
+        "label": "rewardsClaimed",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_mapping(t_address,t_mapping(t_uint256,t_bool))"
+      },
+      {
+        "astId": 291,
+        "contract": "contracts/tetrachain.sol:tetrachain",
+        "label": "leaderboard",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_array(t_struct(PlayerScore)261_storage)dyn_storage"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(PlayerScore)261_storage)dyn_storage": {
+        "base": "t_struct(PlayerScore)261_storage",
+        "encoding": "dynamic_array",
+        "label": "struct tetrachain.PlayerScore[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_mapping(t_uint256,t_bool))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(uint256 => bool))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_bool)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
+      },
+      "t_mapping(t_uint256,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_struct(PlayerScore)261_storage": {
+        "encoding": "inplace",
+        "label": "struct tetrachain.PlayerScore",
+        "members": [
+          {
+            "astId": 256,
+            "contract": "contracts/tetrachain.sol:tetrachain",
+            "label": "player",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 258,
+            "contract": "contracts/tetrachain.sol:tetrachain",
+            "label": "score",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 260,
+            "contract": "contracts/tetrachain.sol:tetrachain",
+            "label": "timestamp",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
